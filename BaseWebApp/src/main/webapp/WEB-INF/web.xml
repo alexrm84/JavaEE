@@ -5,4 +5,25 @@
          version="4.0">
 
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>alexrm84.servlets.MainServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>main</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/403.jsp</location>
+  </error-page>
+
 </web-app>
