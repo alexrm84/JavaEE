@@ -11,6 +11,7 @@ import java.io.IOException;
 public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().println("<title>Order</title>");
         response.getWriter().println("<h1>Order servlet</h1>");
     }
 }

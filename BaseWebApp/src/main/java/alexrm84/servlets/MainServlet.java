@@ -33,6 +33,7 @@ public class MainServlet implements Servlet, Serializable {
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         logger.info("new request");
+        response.getWriter().println("<title>Main</title>");
         response.getWriter().println("<h1>hello</h1>");
     }
 
