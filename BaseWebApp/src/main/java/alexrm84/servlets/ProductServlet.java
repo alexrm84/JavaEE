@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println("<title>Product</title>");
+        response.getWriter().println("<head><title>Product</title></head>");
         response.getWriter().println("<h1>Product servlet</h1>");
     }
 }

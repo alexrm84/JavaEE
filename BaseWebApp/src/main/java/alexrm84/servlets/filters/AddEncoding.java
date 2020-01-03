@@ -19,7 +19,8 @@ public class AddEncoding implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        filterConfig.getServletContext().getRequestDispatcher("/encoding.jsp").include(request, response);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
         chain.doFilter(request, response);
     }
 
