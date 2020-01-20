@@ -1,0 +1,22 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+    <h:form>
+        <p:growl id="messages"/>
+        <p:menubar>
+            <p:menuitem value="Main" action="#{mainController.showIndexPage()}" icon="pi pi-refresh" update="messages"/>
+            <p:menuitem value="Shop" action="#{shopController.showShopPage()}" icon="pi pi-refresh" update="messages"/>
+            <p:menuitem value="Cart" action="#{cartController.showCartPage()}" icon="pi pi-refresh" update="messages"/>
+            <p:menuitem value="User" action="#{userController.showUserPage()}" icon="pi pi-refresh" update="messages"/>
+            <f:facet name="options">
+                <p:commandButton type="button" value="Logout" icon="pi pi-home" />
+            </f:facet>
+        </p:menubar>
+    </h:form>
+</h:body>
+</html>

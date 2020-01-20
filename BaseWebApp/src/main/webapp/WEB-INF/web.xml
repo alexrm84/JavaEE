@@ -6,15 +6,14 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>MainServlet</servlet-name>
-    <servlet-class>alexrm84.servlets.MainServlet</servlet-class>
-  </servlet>
-  
   <servlet-mapping>
-    <servlet-name>MainServlet</servlet-name>
-    <url-pattern>main</url-pattern>
+    <servlet-name>faces-servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
 
   <error-page>
     <error-code>404</error-code>

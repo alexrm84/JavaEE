@@ -6,14 +6,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Getter
 @Setter
-public class Cart {
+@Named
+@SessionScoped
+public class Cart implements Serializable {
 
+    private static final long serialVersionUID = 2268736247949966333L;
     private Map<Long, OrderItem> items;
     private BigDecimal totalPrice;
 

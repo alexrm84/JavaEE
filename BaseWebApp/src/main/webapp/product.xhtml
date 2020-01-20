@@ -1,0 +1,41 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Product"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="WEB-INF/menu.xhtml"/>
+        <div class="row py-2">
+            <div class="col-12">
+                <h:form id="productForm">
+                    <div class="form-group">
+                        <h:outputLabel value="Title" for="title" />
+                        <h:inputText stileClass="form-control" id="title" name="title" placeholder="Enter title"
+                                     value="#{shopController.product.title}" required="true" requiredMessage="Title is required" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Description" for="description" />
+                        <h:inputText stileClass="form-control" id="description" name="description" placeholder="Enter description"
+                                     value="#{shopController.product.description}" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Price" for="price" />
+                        <h:inputText pt:tipe="number" stileClass="form-control" id="price" name="price" placeholder="Enter price"
+                                     value="#{shopController.product.price}" required="true" requiredMessage="Price is required">
+                            <f:converter converterId="javax.faces.BigDecimal" />
+                        </h:inputText>
+                    </div>
+                    <h:commandButton value="Submit" class="btn btn-primary" action="#{shopController.saveProduct()}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

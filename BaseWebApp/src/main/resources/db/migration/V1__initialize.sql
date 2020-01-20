@@ -1,18 +1,18 @@
---DROP TABLE IF EXISTS users;
---CREATE TABLE users (
---  id                    bigserial,
---  phone                 VARCHAR(15) NOT NULL UNIQUE,
---  password              VARCHAR(80),
---  email                 VARCHAR(50) UNIQUE,
---  first_name            VARCHAR(50),
---  last_name             VARCHAR(50),
---  PRIMARY KEY (id)
---);
---
---INSERT INTO users (phone, password, email, first_name, last_name)
---VALUES
---('+79998884444','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@gmail.com', 'Admin','Admin');
---
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id                    bigserial,
+  phone                 VARCHAR(15) NOT NULL UNIQUE,
+  password              VARCHAR(80),
+  email                 VARCHAR(50) UNIQUE,
+  first_name            VARCHAR(50),
+  last_name             VARCHAR(50),
+  PRIMARY KEY (id)
+);
+
+INSERT INTO users (phone, password, email, first_name, last_name)
+VALUES
+('+79998887777','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@gmail.com', 'Admin','Admin');
+
 --DROP TABLE IF EXISTS roles;
 --CREATE TABLE roles (
 --  id                    serial,

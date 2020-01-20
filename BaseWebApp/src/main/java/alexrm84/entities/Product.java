@@ -1,7 +1,5 @@
 package alexrm84.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +10,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
 @Getter
 @Setter
+@Table(name = "products")
 @NoArgsConstructor
 public class Product implements Serializable {
     private static final long serialVersionUID = -7303616358855139206L;

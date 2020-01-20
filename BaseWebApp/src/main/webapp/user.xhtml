@@ -1,0 +1,49 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Shop"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="WEB-INF/menu.xhtml"/>
+        <div class="row py-2">
+            <h:form id="userForm">
+                <div class="col-12">
+                    <h:commandButton value="Add user" stileClass="btn btn-primary" action="#{userController.addUser()}"/>
+                </div>
+                <div class="col-12">
+                    <p:dataTable stileClass="table table-bordered my-2" var="user" value="#{userController.getUsers()}">
+                        <f:facet name="header">
+                            User list
+                        </f:facet>
+                        <p:column headerText="Id">
+                            <h:outputText value="#{user.id}" />
+                        </p:column>
+                        <p:column headerText="phone">
+                                <h:outputText value="#{user.phone}" />
+                        </p:column>
+                        <p:column headerText="password">
+                            <h:outputText value="#{user.password}" />
+                        </p:column>
+                        <p:column headerText="email">
+                            <h:outputText value="#{user.email}" />
+                        </p:column>
+                        <p:column headerText="first_name">
+                            <h:outputText value="#{user.firstName}" />
+                        </p:column>
+                        <p:column headerText="lastName">
+                            <h:outputText value="#{user.lastName}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

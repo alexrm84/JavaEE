@@ -1,0 +1,34 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Product info"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="WEB-INF/menu.xhtml"/>
+        <h:form id="productForm">
+            <p:fieldset legend="#{shopController.product.title}" stileClass="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <p:graphicImage name="n" alt="Product image" />
+                        <h:outputText value="Price: #{shopController.product.price}" />
+                        <h:commandButton value="Add to cart" stileClass="btn btn-success" action="#{cartController.add(shopController.product)}"/>
+                    </h:panelGrid>
+                    <h6>
+                        Много много бодрого описания товара!<br/>
+                        * Всякие характеристики<br/>
+                        * И еще характеристики<br/>
+                        * Опять характеристики
+                    </h6>
+                </h:panelGrid>
+            </p:fieldset>
+        </h:form>
+    </div>
+</h:body>
+</html>

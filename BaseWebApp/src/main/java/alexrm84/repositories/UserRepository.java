@@ -1,6 +1,6 @@
 package alexrm84.repositories;
 
-import alexrm84.entities.Product;
+import alexrm84.entities.User;
 import alexrm84.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,21 +11,22 @@ import java.util.List;
 
 @Named
 @ApplicationScoped
-public class ProductRepository {
+public class UserRepository {
     private Session session;
 
-    public void insert(Product product){
+    public User insert(User user){
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.save(product);
+        user = (User) session.save(user);
         tx.commit();
         session.close();
+        return user;
     }
 
-    public void update(Product product){
+    public void update(User user){
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.update(product);
+        session.update(user);
         tx.commit();
         session.close();
     }
@@ -33,28 +34,41 @@ public class ProductRepository {
     public void delete(Long id){
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.delete(session.load(Product.class, id));
+        session.delete(session.load(User.class, id));
         tx.commit();
         session.close();
     }
 
-    public Product findById(Long id){
-        Product product;
+    public User findById(Long id){
+        User user;
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        product = session.get(Product.class, id);
+        user = session.get(User.class, id);
         tx.commit();
         session.close();
-        return product;
+        return user;
     }
 
-    public List<Product> findAll(){
-        List<Product> products;
+    public List<User> findAll(){
+        List<User> users;
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        products = session.createQuery("FROM Product", Product.class).getResultList();
+        users = session.createQuery("FROM User", User.class).getResultList();
         tx.commit();
         session.close();
-        return products;
+        return users;
+    }
+
+    public User findByPhone(String phone){
+        User user;
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+//        Query query = session.createQuery("FROM User WHERE phone=:phone", User.class);
+//        query.setParameter("phone", phone);
+//        user = (User) query.getSingleResult();
+        user = session.createQuery("FROM User", User.class).getSingleResult();
+        tx.commit();
+        session.close();
+        return user;
     }
 }

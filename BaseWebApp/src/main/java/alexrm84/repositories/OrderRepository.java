@@ -1,56 +1,63 @@
 package alexrm84.repositories;
 
-import alexrm84.entities.Product;
+import alexrm84.entities.Order;
 import alexrm84.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.transaction.Transactional;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+import javax.persistence.Query;
 import java.util.List;
 
+@Named
+@ApplicationScoped
 public class OrderRepository {
     private Session session;
 
-//    @Transactional
-//    public void insert(Product product){
-//        session = HibernateUtil.getInstance().getSf().openSession();
-//        session.save(product);
-//        session.close();
-//    }
-//
-////    @Transactional
-//    public void update(Product product){
-//        session = HibernateUtil.getInstance().getSf().openSession();
-//        Transaction tx = session.beginTransaction();
-//        session.update(product);
-//        tx.commit();
-//        session.close();
-//    }
-//
-////    @Transactional
-//    public void delete(Long id){
-//        session = HibernateUtil.getInstance().getSf().openSession();
-//        Transaction tx = session.beginTransaction();
-//        session.delete(session.load(Product.class, id));
-//        tx.commit();
-//        session.close();
-//    }
-//
-//    @Transactional
-//    public Product findById(Long id){
-//        Product product;
-//        session = HibernateUtil.getInstance().getSf().openSession();
-//        product = session.get(Product.class, id);
-//        session.close();
-//        return product;
-//    }
-//
-//    @Transactional
-//    public List<Product> findAll(){
-//        List<Product> products;
-//        session = HibernateUtil.getInstance().getSf().openSession();
-//        products = session.createQuery("FROM Product", Product.class).getResultList();
-//        session.close();
-//        return products;
-//    }
+    public void insert(Order order){
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(order);
+        tx.commit();
+        session.close();
+    }
+
+    public void update(Order order){
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        session.update(order);
+        tx.commit();
+        session.close();
+    }
+
+    public void delete(Long id){
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(session.load(Order.class, id));
+        tx.commit();
+        session.close();
+    }
+
+    public Order findById(Long id){
+        Order order;
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        order = session.get(Order.class, id);
+        tx.commit();
+        session.close();
+        return order;
+    }
+
+    public List<Order> findByUserId(Long user_id){
+        List<Order> orders;
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Order where user_id = :user_id");
+        query.setParameter("user_id", user_id);
+        orders = query.getResultList();
+        tx.commit();
+        session.close();
+        return orders;
+    }
 }

@@ -1,0 +1,55 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Shop"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="WEB-INF/menu.xhtml"/>
+        <h2>Оформление заказа</h2>
+        <h:form id="orderForm">
+            <h5>Контакты</h5>
+            <div class="form-group">
+                <h:outputLabel value="Phone" for="phone" />
+                <h:inputText stileClass="form-control" id="phone" name="phone" placeholder="Enter phone"
+                             value="#{orderController.order.user.phone}" required="true" requiredMessage="Phone is required" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="FirstName" for="firstName" />
+                <h:inputText stileClass="form-control" id="firstName" name="firstName" placeholder="Enter FirstName"
+                             value="#{orderController.order.user.firstName}" required="true" requiredMessage="FirstName is required" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Address" for="address" />
+                <h:inputText stileClass="form-control" id="address" name="address" placeholder="Enter address"
+                             value="#{orderController.order.address}" required="true" requiredMessage="Address is required" />
+            </div>
+            <hr/>
+            <br/>
+            <h5>Доставка</h5>
+            <hr/>
+            <br/>
+            <h5>Оплата</h5>
+<!--            <div class="form-check">-->
+<!--                <input class="form-check-input" type="radio" name="paymentType" value="paypal" th:text="paypal">-->
+<!--            </div>-->
+<!--            <div class="form-check">-->
+<!--                <input class="form-check-input" type="radio" name="paymentType" value="cash" th:text="cash" checked>-->
+<!--            </div>-->
+            <hr/>
+            <div style="margin-top: 10px" class="form-group">
+                <div class="col-sm-6 controls">
+                    <h:commandButton value="Submit" class="btn btn-primary" action="#{orderController.confirmOrder()}"/>
+                </div>
+            </div>
+        </h:form>
+        <br/>
+    </div>
+</h:body>
+</html>

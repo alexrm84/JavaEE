@@ -1,7 +1,8 @@
 package alexrm84.entities;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,11 +10,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "users")
+@NoArgsConstructor
 public class User implements Serializable {
-    private static final long serialVersionUID = 4081248367912198267L;
+    private static final long serialVersionUID = 5895087542723435578L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +40,24 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
-                joinColumns = @JoinColumn(name = "user_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "users_roles",
+//                joinColumns = @JoinColumn(name = "user_id"),
+//                inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Collection<Role> roles;
 
+
+    public User(String phone, String firstName) {
+        this.phone = phone;
+        this.firstName = firstName;
+    }
+
+    public User(Long id, String phone, String password, String email, String firstName, String lastName) {
+        this.id = id;
+        this.phone = phone;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

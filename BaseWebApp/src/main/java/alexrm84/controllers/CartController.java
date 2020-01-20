@@ -1,0 +1,38 @@
+package alexrm84.controllers;
+
+import alexrm84.entities.OrderItem;
+import alexrm84.entities.Product;
+import alexrm84.utils.Cart;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Named
+@SessionScoped
+public class CartController implements Serializable {
+
+    private static final long serialVersionUID = 2387689879639022921L;
+
+    @Inject
+    private Cart cart;
+
+    public String showCartPage(){
+        return "/cart.xhtml?faces-redirect=true";
+    }
+
+    public List<OrderItem> getItems(){
+        return cart.getItems().values().stream().collect(Collectors.toList());
+    }
+
+    public void add(Product product){
+        cart.addProduct(product);
+    }
+
+    public void reduce(Product product){
+        cart.reduceProduct(product);
+    }
+}
