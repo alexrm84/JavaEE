@@ -49,8 +49,8 @@ public class OrderController implements Serializable {
         this.order.setPhone(user.getPhone());
         cart.getItems().values().stream().forEach(item -> order.addItem(item));
         cart.clear();
-        order.setStatus(Order.Status.CREATED);
-//        orderRepository.insert(order);
+        this.order.setStatus(Order.Status.CREATED);
+        orderRepository.insert(order);
         return "/shop.xhtml?faces-redirect=true";
     }
 }

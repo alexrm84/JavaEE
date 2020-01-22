@@ -1,6 +1,9 @@
 package alexrm84.utils;
 
+import alexrm84.entities.Order;
+import alexrm84.entities.OrderItem;
 import alexrm84.entities.Product;
+import alexrm84.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -43,6 +46,9 @@ public class HibernateUtil {
 //            cfg.setProperty(Environment.HBM2DDL_AUTO, DB_HBM2DDL_AUTO);
 
             cfg.addAnnotatedClass(Product.class);
+            cfg.addAnnotatedClass(User.class);
+            cfg.addAnnotatedClass(Order.class);
+            cfg.addAnnotatedClass(OrderItem.class);
             sf = cfg.buildSessionFactory();
         }
         return sf;

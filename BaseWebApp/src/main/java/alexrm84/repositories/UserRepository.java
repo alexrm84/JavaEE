@@ -4,6 +4,7 @@ import alexrm84.entities.User;
 import alexrm84.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -63,10 +64,9 @@ public class UserRepository {
         User user;
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-//        Query query = session.createQuery("FROM User WHERE phone=:phone", User.class);
-//        query.setParameter("phone", phone);
-//        user = (User) query.getSingleResult();
-        user = session.createQuery("FROM User", User.class).getSingleResult();
+        Query query = session.createQuery("FROM User WHERE phone=:phone", User.class);
+        query.setParameter("phone", phone);
+        user = (User) query.getSingleResult();
         tx.commit();
         session.close();
         return user;
