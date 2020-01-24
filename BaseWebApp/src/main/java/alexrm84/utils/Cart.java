@@ -11,7 +11,9 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -21,7 +23,7 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = 2268736247949966333L;
     private Map<Long, OrderItem> items;
-    private BigDecimal totalPrice;
+    private BigDecimal orderTotalPrice;
 
     @PostConstruct
     public void init(){
@@ -31,10 +33,7 @@ public class Cart implements Serializable {
     public void addProduct(Product product){
         OrderItem item = items.get(product.getId());
         if (item==null) {
-            item = new OrderItem();
-            item.setProduct(product);
-            item.setItemPrice(product.getPrice());
-            item.setQuantity(0);
+            item = new OrderItem(product, 0, product.getPrice());
         }
         item.setQuantity(item.getQuantity()+1);
         item.setTotalPrice(item.getItemPrice().multiply(new BigDecimal(item.getQuantity())));
@@ -56,12 +55,16 @@ public class Cart implements Serializable {
 
     public void clear() {
         items.clear();
-        totalPrice = new BigDecimal(0);
+        orderTotalPrice = new BigDecimal(0);
     }
 
     private void recalculate() {
-        totalPrice = new BigDecimal(0);
-        items.values().stream().forEach(oi -> totalPrice = totalPrice.add(oi.getTotalPrice()));
+        orderTotalPrice = new BigDecimal(0);
+        items.values().stream().forEach(oi -> orderTotalPrice = orderTotalPrice.add(oi.getTotalPrice()));
+    }
+
+    public List<OrderItem> getItems(){
+        return items.values().stream().collect(Collectors.toList());
     }
 
 }

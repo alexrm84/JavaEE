@@ -38,4 +38,9 @@ public class OrderItem implements Serializable {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
+    public OrderItem(Product product, int quantity, BigDecimal itemPrice) {
+        this.product = product;
+        this.quantity = quantity;
+        this.itemPrice = itemPrice;
+    }
 }

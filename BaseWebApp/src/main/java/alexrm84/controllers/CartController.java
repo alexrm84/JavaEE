@@ -27,7 +27,7 @@ public class CartController implements Serializable {
     }
 
     public List<OrderItem> getItems(){
-        return cart.getItems().values().stream().collect(Collectors.toList());
+        return cart.getItems();
     }
 
     public void add(Product product){

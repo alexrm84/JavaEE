@@ -16,7 +16,8 @@ public class HibernateUtil {
     private final String DB_DIALECT = "org.hibernate.dialect.PostgreSQL94Dialect";
     private final String DB_SHOW_SQL = "true";
     private final String DB_CURRENT_SESSION_CONTEXT_CLASS = "thread";
-    private final String DB_HBM2DDL_AUTO = "create-drop";
+    private final String DB_HBM2DDL_AUTO = "update";
+    private final String DB_DS = "RESOURCE_LOCAL";
 
     private SessionFactory sf;
     private Configuration cfg;
@@ -42,8 +43,9 @@ public class HibernateUtil {
             cfg.setProperty(Environment.PASS, DB_PASSWORD);
             cfg.setProperty(Environment.DIALECT, DB_DIALECT);
             cfg.setProperty(Environment.SHOW_SQL, DB_SHOW_SQL);
+            cfg.setProperty(Environment.DATASOURCE, DB_DS);
 //            cfg.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, DB_CURRENT_SESSION_CONTEXT_CLASS);
-//            cfg.setProperty(Environment.HBM2DDL_AUTO, DB_HBM2DDL_AUTO);
+            cfg.setProperty(Environment.HBM2DDL_AUTO, DB_HBM2DDL_AUTO);
 
             cfg.addAnnotatedClass(Product.class);
             cfg.addAnnotatedClass(User.class);
