@@ -10,6 +10,7 @@
 </ui:include>
 
 <h:body>
+    <f:event listener="${shopController.preloadProducts()}" type="preRenderView" />
     <div class="container">
         <ui:include src="WEB-INF/menu.xhtml"/>
         <div class="row py-2">

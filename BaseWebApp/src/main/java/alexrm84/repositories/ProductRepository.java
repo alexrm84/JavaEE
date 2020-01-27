@@ -1,60 +1,42 @@
 package alexrm84.repositories;
 
 import alexrm84.entities.Product;
-import alexrm84.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Named
+@Transactional
 @ApplicationScoped
 public class ProductRepository {
-    private Session session;
+
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
 
     public void insert(Product product){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(product);
-        tx.commit();
-        session.close();
+        em.persist(product);
     }
 
     public void update(Product product){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(product);
-        tx.commit();
-        session.close();
+        em.merge(product);
     }
 
     public void delete(Long id){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(Product.class, id));
-        tx.commit();
-        session.close();
+        Product product = em.find(Product.class, id);
+        if (product != null) {
+            em.remove(product);
+        }
     }
 
     public Product findById(Long id){
-        Product product;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        product = session.get(Product.class, id);
-        tx.commit();
-        session.close();
-        return product;
+        return em.find(Product.class, id);
     }
 
     public List<Product> findAll(){
-        List<Product> products;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        products = session.createQuery("FROM Product", Product.class).getResultList();
-        tx.commit();
-        session.close();
-        return products;
+        return em.createQuery("FROM Product", Product.class).getResultList();
     }
 }

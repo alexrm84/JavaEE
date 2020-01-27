@@ -1,0 +1,13 @@
+# 1. creating datasource section in standalone.xml config
+data-source add \
+   --jndi-name=java:/jboss/datasources/PostgreSQLDS \
+   --name=PostgreSQLDS \
+   --use-java-context=true \
+   --use-ccm=true \
+   --connection-url=jdbc:postgresql://192.168.56.101:5432/postgres?currentSchema=javaee \
+   --driver-name=postgresql \
+   --user-name=postgres \
+   --password=admin
+
+# 2. restarting Wildfly server
+:reload

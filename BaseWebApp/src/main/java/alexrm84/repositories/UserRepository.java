@@ -1,74 +1,50 @@
 package alexrm84.repositories;
 
 import alexrm84.entities.User;
-import alexrm84.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Named
 @ApplicationScoped
+@Transactional
 public class UserRepository {
-    private Session session;
+
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
 
     public User insert(User user){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        user = (User) session.save(user);
-        tx.commit();
-        session.close();
-        return user;
+        em.persist(user);
+        return em.find(User.class, user);
     }
 
     public void update(User user){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(user);
-        tx.commit();
-        session.close();
+        em.merge(user);
     }
 
     public void delete(Long id){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(User.class, id));
-        tx.commit();
-        session.close();
+        User user = em.find(User.class, id);
+        if (user != null) {
+            em.remove(user);
+        }
     }
 
     public User findById(Long id){
-        User user;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        user = session.get(User.class, id);
-        tx.commit();
-        session.close();
-        return user;
+        return em.find(User.class, id);
     }
 
     public List<User> findAll(){
-        List<User> users;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        users = session.createQuery("FROM User", User.class).getResultList();
-        tx.commit();
-        session.close();
-        return users;
+        return em.createQuery("FROM User", User.class).getResultList();
     }
 
     public User findByPhone(String phone){
-        User user;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM User WHERE phone=:phone", User.class);
-        query.setParameter("phone", phone);
-        user = (User) query.getSingleResult();
-        tx.commit();
-        session.close();
-        return user;
+        return (User) em.createQuery("FROM User WHERE phone=:phone")
+                .setParameter("phone", phone)
+                .getSingleResult();
     }
 }

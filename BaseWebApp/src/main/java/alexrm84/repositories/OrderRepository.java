@@ -1,63 +1,45 @@
 package alexrm84.repositories;
 
 import alexrm84.entities.Order;
-import alexrm84.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Named
 @ApplicationScoped
+@Transactional
 public class OrderRepository {
-    private Session session;
+
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
 
     public void insert(Order order){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(order);
-        tx.commit();
-        session.close();
+        em.persist(order);
     }
 
     public void update(Order order){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(order);
-        tx.commit();
-        session.close();
+        em.merge(order);
     }
 
     public void delete(Long id){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(Order.class, id));
-        tx.commit();
-        session.close();
+        Order order = em.find(Order.class, id);
+        if (order != null) {
+            em.remove(order);
+        }
     }
 
     public Order findById(Long id){
-        Order order;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        order = session.get(Order.class, id);
-        tx.commit();
-        session.close();
-        return order;
+        return em.find(Order.class, id);
     }
 
     public List<Order> findByUserId(Long user_id){
-        List<Order> orders;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Order where user_id = :user_id");
-        query.setParameter("user_id", user_id);
-        orders = query.getResultList();
-        tx.commit();
-        session.close();
-        return orders;
+        return em.createQuery("FROM Order where user_id = :user_id")
+                .setParameter("user_id", user_id)
+                .getResultList();
     }
 }

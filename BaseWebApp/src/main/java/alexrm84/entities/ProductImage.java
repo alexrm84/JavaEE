@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "products_images")
-@Data
-@NoArgsConstructor
+//@Entity
+//@Table(name = "products_images")
+//@Data
+//@NoArgsConstructor
 public class ProductImage implements Serializable {
     private static final long serialVersionUID = -7838989013257763044L;
 

@@ -1,65 +1,46 @@
 package alexrm84.repositories;
 
-import alexrm84.entities.Order;
 import alexrm84.entities.OrderItem;
-import alexrm84.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Named
 @ApplicationScoped
+@Transactional
 public class OrderItemRepository {
-    private Session session;
+
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
 
     public void insert(OrderItem orderItem){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(orderItem);
-        tx.commit();
-        session.close();
+        em.persist(orderItem);
     }
 
     public void update(OrderItem orderItem){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(orderItem);
-        tx.commit();
-        session.close();
+        em.merge(orderItem);
     }
 
     public void delete(Long id){
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(OrderItem.class, id));
-        tx.commit();
-        session.close();
+        OrderItem orderItem = em.find(OrderItem.class, id);
+        if (orderItem != null) {
+            em.remove(orderItem);
+        }
     }
 
     public OrderItem findById(Long id){
-        OrderItem orderItem;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        orderItem = session.get(OrderItem.class, id);
-        tx.commit();
-        session.close();
-        return orderItem;
+        return em.find(OrderItem.class, id);
     }
 
     public List<OrderItem> findByOrderId(Long order_id){
-        List<OrderItem> orderItems;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM OrderItem where order_id = :order_id");
-        query.setParameter("order_id", order_id);
-        orderItems = query.getResultList();
-        tx.commit();
-        session.close();
-        return orderItems;
+        return em.createQuery("FROM OrderItem where order_id = :order_id")
+                .setParameter("order_id", order_id)
+                .getResultList();
     }
 
 }

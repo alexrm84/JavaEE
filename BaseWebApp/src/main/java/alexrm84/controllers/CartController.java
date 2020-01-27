@@ -27,14 +27,14 @@ public class CartController implements Serializable {
     }
 
     public List<OrderItem> getItems(){
-        return cart.getItems();
+        return this.cart.getItems();
     }
 
     public void add(Product product){
-        cart.addProduct(product);
+        this.cart.addProduct(product);
     }
 
     public void reduce(Product product){
-        cart.reduceProduct(product);
+        this.cart.reduceProduct(product);
     }
 }

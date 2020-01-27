@@ -8,10 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "categories")
-@Data
-@NoArgsConstructor
+//@Entity
+//@Table(name = "categories")
+//@Data
+//@NoArgsConstructor
 public class Category implements Serializable {
     private static final long serialVersionUID = 665528179997177385L;
 
@@ -23,8 +23,8 @@ public class Category implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> products;
+//    @OneToMany(mappedBy = "category")
+//    private List<Product> products;
 
     @Override
     public boolean equals(Object o) {

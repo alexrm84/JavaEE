@@ -21,11 +21,14 @@ public class ShopController implements Serializable {
     @Setter
     private Product product;
 
+    @Getter
+    private List<Product> products;
+
     @Inject
     private ProductRepository productRepository;
 
-    public List<Product> getProducts(){
-        return productRepository.findAll();
+    public void preloadProducts(){
+        this.products = productRepository.findAll();
     }
 
     public String createProduct(){

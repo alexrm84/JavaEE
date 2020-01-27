@@ -15,14 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 @Named
 @SessionScoped
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 2268736247949966333L;
     private Map<Long, OrderItem> items;
+    @Getter
     private BigDecimal orderTotalPrice;
 
     @PostConstruct
