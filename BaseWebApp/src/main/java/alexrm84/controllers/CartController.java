@@ -3,15 +3,12 @@ package alexrm84.controllers;
 import alexrm84.entities.OrderItem;
 import alexrm84.entities.Product;
 import alexrm84.utils.Cart;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @SessionScoped

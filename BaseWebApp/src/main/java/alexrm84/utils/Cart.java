@@ -3,7 +3,6 @@ package alexrm84.utils;
 import alexrm84.entities.OrderItem;
 import alexrm84.entities.Product;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -20,7 +19,9 @@ import java.util.stream.Collectors;
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 2268736247949966333L;
+
     private Map<Long, OrderItem> items;
+
     @Getter
     private BigDecimal orderTotalPrice;
 
