@@ -1,5 +1,7 @@
 package alexrm84.utils;
 
+import alexrm84.entities.DAO.OrderItemDAO;
+import alexrm84.entities.DAO.ProductDAO;
 import alexrm84.entities.OrderItem;
 import alexrm84.entities.Product;
 import lombok.Getter;
@@ -20,7 +22,7 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = 2268736247949966333L;
 
-    private Map<Long, OrderItem> items;
+    private Map<Long, OrderItemDAO> items;
 
     @Getter
     private BigDecimal orderTotalPrice;
@@ -30,10 +32,10 @@ public class Cart implements Serializable {
         items = new LinkedHashMap<>();
     }
 
-    public void addProduct(Product product){
-        OrderItem item = items.get(product.getId());
+    public void addProduct(ProductDAO product){
+        OrderItemDAO item = items.get(product.getId());
         if (item==null) {
-            item = new OrderItem(product, 0, product.getPrice());
+            item = new OrderItemDAO(product, 0, product.getPrice());
         }
         item.setQuantity(item.getQuantity()+1);
         item.setTotalPrice(item.getItemPrice().multiply(new BigDecimal(item.getQuantity())));
@@ -41,8 +43,8 @@ public class Cart implements Serializable {
         recalculate();
     }
 
-    public void reduceProduct(Product product){
-        OrderItem item = items.get(product.getId());
+    public void reduceProduct(ProductDAO product){
+        OrderItemDAO item = items.get(product.getId());
         if (item.getQuantity()==1){
             items.remove(product.getId());
         }else {
@@ -60,10 +62,10 @@ public class Cart implements Serializable {
 
     private void recalculate() {
         orderTotalPrice = new BigDecimal(0);
-        items.values().stream().forEach(oi -> orderTotalPrice = orderTotalPrice.add(oi.getTotalPrice()));
+        items.values().stream().map(oi -> orderTotalPrice = orderTotalPrice.add(oi.getTotalPrice()));
     }
 
-    public List<OrderItem> getItems(){
+    public List<OrderItemDAO> getItems(){
         return items.values().stream().collect(Collectors.toList());
     }
 

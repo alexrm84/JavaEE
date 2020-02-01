@@ -52,12 +52,22 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-    public User(Long id, String phone, String password, String email, String firstName, String lastName) {
+    public User(String phone, String password, String email, String firstName, String lastName, List<Order> orders) {
+        this.phone = phone;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.orders = orders;
+    }
+
+    public User(Long id, String phone, String password, String email, String firstName, String lastName, List<Order> orders) {
         this.id = id;
         this.phone = phone;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.orders = orders;
     }
 }

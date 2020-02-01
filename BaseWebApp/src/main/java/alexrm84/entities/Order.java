@@ -1,5 +1,6 @@
 package alexrm84.entities;
 
+import alexrm84.utils.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,10 +22,6 @@ import java.util.List;
 public class Order implements Serializable {
     private static final long serialVersionUID = -4330813651525003249L;
 
-    public enum Status{
-        CREATED, SENT, RECEIVED, CANCELED, PAID
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -45,7 +42,7 @@ public class Order implements Serializable {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private OrderStatus status;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -66,10 +63,13 @@ public class Order implements Serializable {
         this.price = new BigDecimal(0);
     }
 
-    public void addItem(OrderItem item){
-        items.add(item);
-        item.setOrder(this);
-        price = price.add(item.getTotalPrice());
+    public Order(User user, BigDecimal price, String phone, String address, OrderStatus status, List<OrderItem> items) {
+        this.user = user;
+        this.price = price;
+        this.phone = phone;
+        this.address = address;
+        this.status = status;
+        this.items = items;
     }
 }
 

@@ -43,4 +43,12 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
         this.itemPrice = itemPrice;
     }
+
+    public OrderItem(Product product, Order order, int quantity, BigDecimal itemPrice, BigDecimal totalPrice) {
+        this.product = product;
+        this.order = order;
+        this.quantity = quantity;
+        this.itemPrice = itemPrice;
+        this.totalPrice = totalPrice;
+    }
 }

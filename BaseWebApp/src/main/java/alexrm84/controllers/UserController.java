@@ -1,7 +1,7 @@
 package alexrm84.controllers;
 
-import alexrm84.entities.User;
-import alexrm84.repositories.UserRepository;
+import alexrm84.entities.DAO.UserDAO;
+import alexrm84.services.UserService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,26 +19,26 @@ public class UserController implements Serializable {
 
     @Getter
     @Setter
-    private User user;
+    private UserDAO user;
 
     @Inject
-    private UserRepository userRepository;
+    private UserService userService;
 
     public String showUserPage(){
         return "/user.xhtml?faces-redirect=true";
     }
 
     public String addUser(){
-        this.user = new User();
+        this.user = new UserDAO();
         return "/newUser.xhtml?faces-redirect=true";
     }
 
     public String saveUser(){
-        userRepository.insert(this.user);
+        userService.insert(this.user);
         return "/user.xhtml?faces-redirect=true";
     }
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
+    public List<UserDAO> getUsers(){
+        return userService.findAll();
     }
 }

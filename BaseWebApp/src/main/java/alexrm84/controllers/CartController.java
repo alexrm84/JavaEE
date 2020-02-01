@@ -1,7 +1,7 @@
 package alexrm84.controllers;
 
-import alexrm84.entities.OrderItem;
-import alexrm84.entities.Product;
+import alexrm84.entities.DAO.OrderItemDAO;
+import alexrm84.entities.DAO.ProductDAO;
 import alexrm84.utils.Cart;
 
 import javax.enterprise.context.SessionScoped;
@@ -23,15 +23,15 @@ public class CartController implements Serializable {
         return "/cart.xhtml?faces-redirect=true";
     }
 
-    public List<OrderItem> getItems(){
+    public List<OrderItemDAO> getItems(){
         return this.cart.getItems();
     }
 
-    public void add(Product product){
+    public void add(ProductDAO product){
         this.cart.addProduct(product);
     }
 
-    public void reduce(Product product){
+    public void reduce(ProductDAO product){
         this.cart.reduceProduct(product);
     }
 }

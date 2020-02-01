@@ -20,10 +20,10 @@
                             Cart
                         </f:facet>
                         <p:column headerText="Title">
-                            <h:outputText value="#{item.product.title}" />
+                            <h:outputText value="#{item.productDAO.title}" />
                         </p:column>
                         <p:column headerText="Price">
-                            <h:outputText value="#{item.product.price}" />
+                            <h:outputText value="#{item.productDAO.price}" />
                         </p:column>
                         <p:column headerText="Count">
                             <h:outputText value="#{item.quantity}" />
@@ -32,7 +32,7 @@
                             <h:outputText value="#{item.totalPrice}" />
                         </p:column>
                         <p:column headerText="Actions">
-                            <h:commandButton value="Reduce" stileClass="btn btn-danger" action="#{cartController.reduce(item.product)}">
+                            <h:commandButton value="Reduce" stileClass="btn btn-danger" action="#{cartController.reduce(item.productDAO)}">
                                 <f:ajax event="click" render="cartForm" />
                             </h:commandButton>
                         </p:column>
