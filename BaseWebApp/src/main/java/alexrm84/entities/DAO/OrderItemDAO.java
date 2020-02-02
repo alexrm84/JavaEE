@@ -15,7 +15,7 @@ public class OrderItemDAO implements Serializable {
 
     private Long id;
     private ProductDAO productDAO;
-    private OrderDAO orderDAO;
+//    private OrderDAO orderDAO;
     private int quantity;
     private BigDecimal itemPrice;
     private BigDecimal totalPrice;
@@ -26,10 +26,10 @@ public class OrderItemDAO implements Serializable {
         this.itemPrice = itemPrice;
     }
 
-    public OrderItemDAO(Long id, ProductDAO productDAO, OrderDAO orderDAO, int quantity, BigDecimal itemPrice, BigDecimal totalPrice) {
+    public OrderItemDAO(Long id, ProductDAO productDAO, /*OrderDAO orderDAO,*/ int quantity, BigDecimal itemPrice, BigDecimal totalPrice) {
         this.id = id;
         this.productDAO = productDAO;
-        this.orderDAO = orderDAO;
+//        this.orderDAO = orderDAO;
         this.quantity = quantity;
         this.itemPrice = itemPrice;
         this.totalPrice = totalPrice;

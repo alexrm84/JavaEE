@@ -42,7 +42,7 @@ public class OrderDAO implements Serializable {
 
     public void addItem(OrderItemDAO item){
         items.add(item);
-        item.setOrderDAO(this);
+//        item.setOrderDAO(this);
         price = price.add(item.getTotalPrice());
     }
 

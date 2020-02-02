@@ -52,7 +52,7 @@ public class UserService {
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getOrders().stream().map(o -> orderService.convertToDAO(o)).collect(Collectors.toList()));
+                null);
     }
 
     public User convertFromDao(UserDAO userDAO) {
@@ -62,6 +62,6 @@ public class UserService {
                 userDAO.getEmail(),
                 userDAO.getFirstName(),
                 userDAO.getLastName(),
-                userDAO.getOrderDAOS().stream().map(o -> orderService.convertFromDAO(o)).collect(Collectors.toList()));
+                null);
     }
 }

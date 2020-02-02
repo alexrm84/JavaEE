@@ -5,6 +5,7 @@ import alexrm84.entities.DAO.UserDAO;
 import alexrm84.services.OrderService;
 import alexrm84.services.UserService;
 import alexrm84.utils.Cart;
+import alexrm84.utils.Logger;
 import alexrm84.utils.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -34,12 +36,14 @@ public class OrderController implements Serializable {
     @Setter
     private OrderDAO order;
 
+    @Interceptors({Logger.class})
     public String createOrder() {
         this.order = new OrderDAO();
         this.order.setUserDAO(new UserDAO());
         return "/order.xhtml?faces-redirect=true";
     }
 
+    @Interceptors({Logger.class})
     public String confirmOrder() {
         UserDAO user = userService.findByPhone(this.order.getUserDAO().getPhone());
         if (user == null) {

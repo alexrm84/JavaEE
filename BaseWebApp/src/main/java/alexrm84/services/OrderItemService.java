@@ -45,7 +45,7 @@ public class OrderItemService {
     public OrderItemDAO convertToDao(OrderItem orderItem){
         return new OrderItemDAO(orderItem.getId(),
                 productService.convertToDao(orderItem.getProduct()),
-                orderService.convertToDAO(orderItem.getOrder()),
+//                orderService.convertToDAO(orderItem.getOrder()),
                 orderItem.getQuantity(),
                 orderItem.getItemPrice(),
                 orderItem.getTotalPrice());
@@ -53,7 +53,7 @@ public class OrderItemService {
 
     public OrderItem convertFromDao(OrderItemDAO orderItemDAO) {
         OrderItem orderItem = new OrderItem(productService.convertFromDao(orderItemDAO.getProductDAO()),
-                orderService.convertFromDAO(orderItemDAO.getOrderDAO()),
+//                orderService.convertFromDAO(orderItemDAO.getOrderDAO()),
                 orderItemDAO.getQuantity(),
                 orderItemDAO.getItemPrice(),
                 orderItemDAO.getTotalPrice());

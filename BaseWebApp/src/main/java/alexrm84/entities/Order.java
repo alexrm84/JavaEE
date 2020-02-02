@@ -52,7 +52,7 @@ public class Order implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(/*mappedBy = "order",*/ cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> items;
 
     public Order(User user, String phone, String address) {

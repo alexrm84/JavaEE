@@ -25,9 +25,9 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne()
-    @JoinColumn(name = "order_id")
-    private Order order;
+//    @ManyToOne()
+//    @JoinColumn(name = "order_id")
+//    private Order order;
 
     @Column(name = "quantity")
     private int quantity;
@@ -44,9 +44,9 @@ public class OrderItem implements Serializable {
         this.itemPrice = itemPrice;
     }
 
-    public OrderItem(Product product, Order order, int quantity, BigDecimal itemPrice, BigDecimal totalPrice) {
+    public OrderItem(Product product, /*Order order,*/ int quantity, BigDecimal itemPrice, BigDecimal totalPrice) {
         this.product = product;
-        this.order = order;
+//        this.order = order;
         this.quantity = quantity;
         this.itemPrice = itemPrice;
         this.totalPrice = totalPrice;

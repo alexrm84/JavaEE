@@ -4,18 +4,12 @@ import alexrm84.entities.Order;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
-//@Stateless
-//@TransactionAttribute
-@Named
-@ApplicationScoped
-@Transactional
+@Stateless
+@TransactionAttribute
 public class OrderRepositoryImpl implements OrderRepository {
 
     @PersistenceContext(unitName = "ds")
