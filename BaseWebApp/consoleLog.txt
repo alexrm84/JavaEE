@@ -1,0 +1,18 @@
+alexrm84@DESKTOP-CIO6V30 MINGW64 /d/.Programming/work_project/JavaEE/JavaEE (Lesson7HW)
+$ curl http://localhost:8080/BaseWebApp/api/v1/products
+[{"description":"Смартфон","id":2,"price":8600.00,"title":"Смартфон Samsung Galaxy A10"},{"descript
+ion":"Смартфон","id":3,"price":14800.00,"title":"Смартфон Samsung Galaxy A30"},{"description":"Смар
+тфон","id":4,"price":55000.00,"title":"Смартфон Apple iPhone Xr"},{"description":"Смартфон","id":5,
+"price":30000.00,"title":"Смартфон Apple iPhone 7"},{"description":"Смартфон","id":6,"price":21000.
+00,"title":"Смартфон Apple iPhone SE"},{"description":"Смартфон","id":7,"price":64000.00,"title":"С
+мартфон Apple iPhone X"},{"description":"Смартфон","id":8,"price":20000.00,"title":"Смартфон HUAWEI
+ P30 lite"},{"description":"Смартфон","id":9,"price":40000.00,"title":"Смартфон HUAWEI P30"},{"desc
+ription":"Смартфон","id":10,"price":10000.00,"title":"Смартфон HUAWEI Y7"},{"description":"Смартфон
+","id":11,"price":22000.00,"title":"Смартфон HUAWEI Nova 3"},{"description":"Смартфон","id":12,"pri
+ce":35000.00,"title":"Смартфон Sony Xperia XZ2"},{"description":"Смартфон","id":13,"price":10000.00
+,"title":"Смартфон Sony Xperia XA2 Ultra"},{"description":"Смартфон","id":14,"price":20000.00,"titl
+e":"Смартфон Xiaomi Mi 9T"},{"description":"Смартфон","id":15,"price":14000.00,"title":"Смартфон Xi
+aomi Redmi Note 7"},{"description":"Наушники","id":16,"price":2000.00,"title":"Наушники JBL T450BT"
+},{"description":"Наушники","id":17,"price":28000.00,"title":"Наушники Sony WH-1000XM3"},{"descript
+ion":"Смартфон","id":1,"price":15000.00,"title":"Смартфон Samsung Galaxy A50"}]
+alexrm84@DESKTOP-CIO6V30 MINGW64 /d/.Programming/work_project/JavaEE/JavaEE (Lesson7HW)

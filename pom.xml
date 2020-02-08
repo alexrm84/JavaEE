@@ -11,6 +11,7 @@
 
   <modules>
     <module>BaseWebApp</module>
+      <module>wsClient</module>
   </modules>
 
 </project>

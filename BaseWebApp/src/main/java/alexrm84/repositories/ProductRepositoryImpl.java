@@ -16,13 +16,14 @@ public class ProductRepositoryImpl implements ProductRepository {
     private EntityManager em;
 
     @Override
-    public void insert(Product product){
+    public Product insert(Product product){
         em.persist(product);
+        return em.find(Product.class, product);
     }
 
     @Override
-    public void update(Product product){
-        em.merge(product);
+    public Product update(Product product){
+        return em.merge(product);
     }
 
     @Override
