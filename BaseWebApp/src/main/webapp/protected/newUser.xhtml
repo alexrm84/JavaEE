@@ -5,20 +5,20 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="WEB-INF/head.xhtml">
+<ui:include src="../WEB-INF/head.xhtml">
     <ui:param name="title" value="New User"/>
 </ui:include>
 
 <h:body>
     <div class="container">
-        <ui:include src="WEB-INF/menu.xhtml"/>
+        <ui:include src="../WEB-INF/menu.xhtml"/>
         <div class="row py-2">
             <div class="col-12">
-                <h:form id="productForm">
+                <h:form id="userForm">
                     <div class="form-group">
-                        <h:outputLabel value="Phone" for="phone" />
-                        <h:inputText stileClass="form-control" id="phone" name="phone" placeholder="Enter phone"
-                                     value="#{userController.user.phone}" required="true" requiredMessage="phone is required" />
+                        <h:outputLabel value="login" for="login" />
+                        <h:inputText stileClass="form-control" id="login" name="login" placeholder="Enter login"
+                                     value="#{userController.user.login}" required="true" requiredMessage="phone is required" />
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="password" for="password" />
@@ -40,7 +40,13 @@
                         <h:inputText stileClass="form-control" id="lastName" name="lastName" placeholder="Enter lastName"
                                      value="#{userController.user.lastName}" required="true" requiredMessage="lastName is required" />
                     </div>
-                    <h:commandButton value="Submit" class="btn btn-primary" action="#{userController.saveProduct()}"/>
+                    <div class="form-group">
+                        <h:selectManyCheckbox value="#{userController.user.roleDAOS}" layout="pageDirection">
+                            <f:selectItems value="#{userController.roles}" />
+                        </h:selectManyCheckbox>
+<!--                        <h:outputLabel class="form-check-label" for="#{role.id}" value="#{role.name}" />-->
+                    </div>
+                    <h:commandButton value="Submit" class="btn btn-primary" action="#{userController.saveUser()}"/>
                 </h:form>
             </div>
         </div>

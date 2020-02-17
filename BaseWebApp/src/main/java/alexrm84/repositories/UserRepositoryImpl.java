@@ -16,9 +16,8 @@ public class UserRepositoryImpl implements UserRepository {
     private EntityManager em;
 
     @Override
-    public User insert(User user){
+    public void insert(User user){
         em.persist(user);
-        return em.find(User.class, user);
     }
 
     @Override
@@ -45,9 +44,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findByPhone(String phone){
-        return (User) em.createQuery("FROM User WHERE phone=:phone")
-                .setParameter("phone", phone)
+    public User findByLogin(String login){
+        return (User) em.createQuery("FROM User WHERE login=:login")
+                .setParameter("login", login)
                 .getSingleResult();
     }
 }

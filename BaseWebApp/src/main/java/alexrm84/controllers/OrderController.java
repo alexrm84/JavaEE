@@ -45,13 +45,14 @@ public class OrderController implements Serializable {
 
     @Interceptors({Logger.class})
     public String confirmOrder() {
-        UserDAO user = userService.findByPhone(this.order.getUserDAO().getPhone());
+        UserDAO user = userService.findByLogin(this.order.getUserDAO().getLogin());
         if (user == null) {
-            user = userService.insert(this.order.getUserDAO());
+            userService.insert(this.order.getUserDAO());
+            user = userService.findByLogin(this.order.getUserDAO().getLogin());
         }
         this.order.setUserDAO(user);
         this.order.setPrice(new BigDecimal(0));
-        this.order.setPhone(user.getPhone());
+        this.order.setPhone(user.getLogin());
         cart.getItems().stream().forEach(item -> order.addItem(item));
         cart.clear();
         this.order.setStatus(OrderStatus.CREATED);

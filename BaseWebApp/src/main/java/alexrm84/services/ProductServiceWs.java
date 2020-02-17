@@ -1,21 +1,26 @@
 package alexrm84.services;
 
 import alexrm84.entities.DAO.ProductDAO;
-import alexrm84.entities.Product;
 
-import javax.ejb.Local;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.List;
 
-@Local
-public interface ProductService {
+@WebService
+public interface ProductServiceWs {
 
+    @WebMethod
     ProductDAO insert(ProductDAO productDAO);
+
+    @WebMethod
     ProductDAO update(ProductDAO productDAO);
+
+    @WebMethod
     void delete(Long id);
+
+    @WebMethod
     ProductDAO findById(Long id);
+
+    @WebMethod
     List<ProductDAO> findAll();
-    ProductDAO convertToDao(Product product);
-    Product convertFromDao(ProductDAO productDAO);
 }
