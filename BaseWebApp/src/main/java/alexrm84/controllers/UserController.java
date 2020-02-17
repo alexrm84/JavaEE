@@ -1,6 +1,8 @@
 package alexrm84.controllers;
 
+import alexrm84.entities.DAO.RoleDAO;
 import alexrm84.entities.DAO.UserDAO;
+import alexrm84.services.RoleService;
 import alexrm84.services.UserService;
 import alexrm84.utils.Logger;
 import lombok.Getter;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @Named
 @SessionScoped
+//@ServletSecurity(@HttpConstraint(rolesAllowed = {"ROLE_ADMIN"}))
 public class UserController implements Serializable {
 
     private static final long serialVersionUID = -937745244661108420L;
@@ -23,28 +26,39 @@ public class UserController implements Serializable {
     @Setter
     private UserDAO user;
 
+    @Getter
+    @Setter
+    private List<UserDAO> users;
+
+    @Getter
+    @Setter
+    private List<RoleDAO> roles;
+
     @Inject
     private UserService userService;
 
+    @Inject
+    private RoleService roleService;
+
+    public void preloadVariables() {
+        this.users = userService.findAll();
+        this.roles = roleService.findAll();
+    }
+
     @Interceptors({Logger.class})
     public String showUserPage(){
-        return "/user.xhtml?faces-redirect=true";
+        return "/protected/user.xhtml?faces-redirect=true";
     }
 
     @Interceptors({Logger.class})
     public String addUser(){
         this.user = new UserDAO();
-        return "/newUser.xhtml?faces-redirect=true";
+        return "/protected/newUser.xhtml?faces-redirect=true";
     }
 
     @Interceptors({Logger.class})
     public String saveUser(){
         userService.insert(this.user);
-        return "/user.xhtml?faces-redirect=true";
-    }
-
-    @Interceptors({Logger.class})
-    public List<UserDAO> getUsers(){
-        return userService.findAll();
+        return "/protected/user.xhtml?faces-redirect=true";
     }
 }

@@ -1,0 +1,36 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Login page"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="WEB-INF/menu.xhtml"/>
+        <div class="row py-2">
+            <div class="col-12">
+                <form id="loginForm" action="j_security_check">
+                    <div class="form-group">
+                        <h:outputLabel value="Login" for="j_username" />
+                        <h:inputText styleClass="form-control" id="j_username" name="j_username"
+                                     placeHolder="Enter login" reguired="true" value="#{userController.user.login}" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Password" for="j_password" />
+                        <h:inputText p:type="password" styleClass="form-control" id="j_password"
+                                     name="j_password" placeHolder="Enter password" value="#{userController.user.password}" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" formmethod="post">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

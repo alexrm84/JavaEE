@@ -5,13 +5,14 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:include src="WEB-INF/head.xhtml">
+<ui:include src="../WEB-INF/head.xhtml">
     <ui:param name="title" value="Shop"/>
 </ui:include>
 
 <h:body>
     <div class="container">
-        <ui:include src="WEB-INF/menu.xhtml"/>
+        <f:event listener="${userController.preloadVariables()}" type="preRenderView" />
+        <ui:include src="../WEB-INF/menu.xhtml"/>
         <div class="row py-2">
             <h:form id="userForm">
                 <div class="col-12">
@@ -25,8 +26,8 @@
                         <p:column headerText="Id">
                             <h:outputText value="#{user.id}" />
                         </p:column>
-                        <p:column headerText="phone">
-                                <h:outputText value="#{user.phone}" />
+                        <p:column headerText="login">
+                                <h:outputText value="#{user.login}" />
                         </p:column>
                         <p:column headerText="password">
                             <h:outputText value="#{user.password}" />

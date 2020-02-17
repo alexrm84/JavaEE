@@ -1,10 +1,7 @@
 package alexrm84.services;
 
-import alexrm84.entities.DAO.ProductDAO;
 import alexrm84.entities.DAO.UserDAO;
-import alexrm84.entities.Product;
 import alexrm84.entities.User;
-import alexrm84.repositories.ProductRepository;
 import alexrm84.repositories.UserRepository;
 
 import javax.ejb.Stateless;
@@ -19,10 +16,13 @@ public class UserService {
     private OrderService orderService;
 
     @Inject
+    private RoleService roleService;
+
+    @Inject
     private UserRepository userRepository;
 
-    public UserDAO insert(UserDAO userDAO){
-        return convertToDao(userRepository.insert(convertFromDao(userDAO)));
+    public void insert(UserDAO userDAO){
+        userRepository.insert(convertFromDao(userDAO));
     }
 
     public void update(UserDAO userDAO){
@@ -41,27 +41,29 @@ public class UserService {
         return userRepository.findAll().stream().map(u -> convertToDao(u)).collect(Collectors.toList());
     }
 
-    public UserDAO findByPhone(String phone){
-        return convertToDao(userRepository.findByPhone(phone));
+    public UserDAO findByLogin(String login){
+        return convertToDao(userRepository.findByLogin(login));
     }
 
     public UserDAO convertToDao(User user){
         return new UserDAO(user.getId(),
-                user.getPhone(),
+                user.getLogin(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
+                null,
                 null);
     }
 
     public User convertFromDao(UserDAO userDAO) {
         return new User(userDAO.getId(),
-                userDAO.getPhone(),
+                userDAO.getLogin(),
                 userDAO.getPassword(),
                 userDAO.getEmail(),
                 userDAO.getFirstName(),
                 userDAO.getLastName(),
-                null);
+                null,
+                userDAO.getRoleDAOS().stream().map(r -> roleService.convertFromDao(r)).collect(Collectors.toList()));
     }
 }

@@ -22,8 +22,8 @@ public class User implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "login")
+    private String login;
 
     @Column(name = "password")
     private String password;
@@ -40,20 +40,20 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "users_roles",
-//                joinColumns = @JoinColumn(name = "user_id"),
-//                inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Collection<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
 
-    public User(String phone, String firstName) {
-        this.phone = phone;
+    public User(String login, String firstName) {
+        this.login = login;
         this.firstName = firstName;
     }
 
-    public User(String phone, String password, String email, String firstName, String lastName, List<Order> orders) {
-        this.phone = phone;
+    public User(String login, String password, String email, String firstName, String lastName, List<Order> orders) {
+        this.login = login;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -61,13 +61,14 @@ public class User implements Serializable {
         this.orders = orders;
     }
 
-    public User(Long id, String phone, String password, String email, String firstName, String lastName, List<Order> orders) {
+    public User(Long id, String login, String password, String email, String firstName, String lastName, List<Order> orders, List<Role> roles) {
         this.id = id;
-        this.phone = phone;
+        this.login = login;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.orders = orders;
+        this.roles = roles;
     }
 }
