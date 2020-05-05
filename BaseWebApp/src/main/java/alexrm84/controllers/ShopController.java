@@ -1,13 +1,15 @@
 package alexrm84.controllers;
 
-import alexrm84.entities.Product;
-import alexrm84.repositories.ProductRepository;
+import alexrm84.entities.DAO.ProductDAO;
+import alexrm84.services.ProductService;
+import alexrm84.utils.Logger;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,46 +21,52 @@ public class ShopController implements Serializable {
 
     @Getter
     @Setter
-    private Product product;
+    private ProductDAO product;
 
     @Getter
-    private List<Product> products;
+    private List<ProductDAO> products;
 
     @Inject
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     public void preloadProducts(){
-        this.products = productRepository.findAll();
+        this.products = productService.findAll();
     }
 
+    @Interceptors({Logger.class})
     public String createProduct(){
-        this.product = new Product();
+        this.product = new ProductDAO();
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public String editProduct(Product product){
-        this.product = product;
+    @Interceptors({Logger.class})
+    public String editProduct(ProductDAO productDAO){
+        this.product = productDAO;
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Product product){
-        productRepository.delete(product.getId());
+    @Interceptors({Logger.class})
+    public void deleteProduct(ProductDAO product){
+        productService.delete(product.getId());
     }
 
+    @Interceptors({Logger.class})
     public String saveProduct(){
         if (this.product.getId() == null){
-            productRepository.insert(product);
+            productService.insert(product);
         } else {
-            productRepository.update(product);
+            productService.update(product);
         }
         return "/shop.xhtml?faces-redirect=true";
     }
 
-    public String showProductInfo(Product product){
-        this.product = product;
+    @Interceptors({Logger.class})
+    public String showProductInfo(ProductDAO productDAO){
+        this.product = productDAO;
         return "/productInfo.xhtml?faces-redirect=true";
     }
 
+    @Interceptors({Logger.class})
     public String showShopPage(){
         return "/shop.xhtml?faces-redirect=true";
     }

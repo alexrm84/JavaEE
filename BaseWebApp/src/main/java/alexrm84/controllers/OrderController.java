@@ -1,16 +1,19 @@
 package alexrm84.controllers;
 
-import alexrm84.entities.Order;
-import alexrm84.entities.User;
-import alexrm84.repositories.OrderRepository;
-import alexrm84.repositories.UserRepository;
+import alexrm84.entities.DAO.OrderDAO;
+import alexrm84.entities.DAO.UserDAO;
+import alexrm84.services.OrderService;
+import alexrm84.services.UserService;
 import alexrm84.utils.Cart;
+import alexrm84.utils.Logger;
+import alexrm84.utils.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -21,36 +24,38 @@ public class OrderController implements Serializable {
     private static final long serialVersionUID = 1406583733340258307L;
 
     @Inject
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @Inject
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Inject
     private Cart cart;
 
     @Getter
     @Setter
-    private Order order;
+    private OrderDAO order;
 
-    public String createOrder(){
-        this.order = new Order();
-        this.order.setUser(new User());
+    @Interceptors({Logger.class})
+    public String createOrder() {
+        this.order = new OrderDAO();
+        this.order.setUserDAO(new UserDAO());
         return "/order.xhtml?faces-redirect=true";
     }
 
-    public String confirmOrder(){
-        User user = userRepository.findByPhone(this.order.getUser().getPhone());
-        if (user ==null){
-            user = userRepository.insert(this.order.getUser());
+    @Interceptors({Logger.class})
+    public String confirmOrder() {
+        UserDAO user = userService.findByPhone(this.order.getUserDAO().getPhone());
+        if (user == null) {
+            user = userService.insert(this.order.getUserDAO());
         }
-        this.order.setUser(user);
+        this.order.setUserDAO(user);
         this.order.setPrice(new BigDecimal(0));
         this.order.setPhone(user.getPhone());
         cart.getItems().stream().forEach(item -> order.addItem(item));
         cart.clear();
-        this.order.setStatus(Order.Status.CREATED);
-        orderRepository.insert(order);
+        this.order.setStatus(OrderStatus.CREATED);
+        orderService.insert(order);
         return "/shop.xhtml?faces-redirect=true";
     }
 }
