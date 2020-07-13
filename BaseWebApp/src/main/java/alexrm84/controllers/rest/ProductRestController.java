@@ -24,12 +24,12 @@ public interface ProductRestController {
     @PUT
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    ProductDAO insert(ProductDAO productDAO);
+    void insert(ProductDAO productDAO);
 
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
-    ProductDAO update(ProductDAO productDAO);
+    void update(ProductDAO productDAO);
 
     @DELETE
     @Path("/{id}/id")

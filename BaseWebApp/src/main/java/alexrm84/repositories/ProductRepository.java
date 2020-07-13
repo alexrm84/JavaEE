@@ -7,8 +7,8 @@ import java.util.List;
 
 @Local
 public interface ProductRepository {
-    Product insert(Product product);
-    Product update(Product product);
+    void insert(Product product);
+    void update(Product product);
     void delete(Long id);
     Product findById(Long id);
     List<Product> findAll();

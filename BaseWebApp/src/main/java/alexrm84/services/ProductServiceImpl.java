@@ -19,13 +19,13 @@ public class ProductServiceImpl implements ProductService, ProductServiceWs, Pro
     private ProductRepository productRepository;
 
     @Override
-    public ProductDAO insert(ProductDAO productDAO){
-        return convertToDao(productRepository.insert(convertFromDao(productDAO)));
+    public void insert(ProductDAO productDAO){
+        productRepository.insert(convertFromDao(productDAO));
     }
 
     @Override
-    public ProductDAO update(ProductDAO productDAO){
-        return convertToDao(productRepository.update(convertFromDao(productDAO)));
+    public void update(ProductDAO productDAO){
+        productRepository.update(convertFromDao(productDAO));
     }
 
     @Override

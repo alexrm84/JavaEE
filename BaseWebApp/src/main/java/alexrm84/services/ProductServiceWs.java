@@ -10,10 +10,10 @@ import java.util.List;
 public interface ProductServiceWs {
 
     @WebMethod
-    ProductDAO insert(ProductDAO productDAO);
+    void insert(ProductDAO productDAO);
 
     @WebMethod
-    ProductDAO update(ProductDAO productDAO);
+    void update(ProductDAO productDAO);
 
     @WebMethod
     void delete(Long id);

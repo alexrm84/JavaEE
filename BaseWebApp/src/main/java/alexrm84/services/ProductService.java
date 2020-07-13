@@ -11,8 +11,8 @@ import java.util.List;
 @Local
 public interface ProductService {
 
-    ProductDAO insert(ProductDAO productDAO);
-    ProductDAO update(ProductDAO productDAO);
+    void insert(ProductDAO productDAO);
+    void update(ProductDAO productDAO);
     void delete(Long id);
     ProductDAO findById(Long id);
     List<ProductDAO> findAll();
